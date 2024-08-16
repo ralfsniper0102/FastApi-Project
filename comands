@@ -1,0 +1,9 @@
+# comando para executar o servidor
+# uvicorn src.server:app --reload --reload-dir=src
+
+
+# gerar migrations
+# alembic init migrations
+# {configurações do arquivo alembic.ini e env.py}
+# alembic revision --autogenerate -m "nome da revisão"
+# alembic upgrade head
