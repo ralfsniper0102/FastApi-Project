@@ -1,18 +1,11 @@
-from sqlalchemy import Column, Integer, String, Float, Boolean, ForeignKey, Date
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Date
 from src.infra.sqlalchemy.config.database import Base
 
-
-class Usuario(Base):
-    __tablename__ = 'usuario'
+class User(Base):
+    __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    nome = Column(String)
+    name = Column(String)
     email = Column(String)
-    senha = Column(String)
-    nascimento = Column(Date)
-    foto = Column(String)
-
-
-
-
+    password = Column(String)
+    birthDay = Column(Date)

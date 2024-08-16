@@ -12,31 +12,34 @@ import datetime
 #         from_attributes = True
 
 class GetAllUsersResponseModel(BaseModel):
-    nome: str
+    name: str
     email: str
-    nascimento: datetime.date
+    birthDay: datetime.date
 
     class Config:
         from_attributes = True
 
 class UserViewModel(BaseModel):
-    id: Optional[int] = None
-    nome: str
+    name: str
     email: str
-    senha: str
-    nascimento: datetime.date
-    foto: Optional[str] = None
+    password: str
+    birthDay: datetime.date
 
     class Config:
         from_attributes = True
 
 class UserCreate(BaseModel):
-    nome: str
+    name: str
     email: str
-    senha: str
-    nascimento: datetime.date
+    password: str
+    birthDay: datetime.date
 
     class Config:
         from_attributes = True
 
-
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+    
+class LoginResponse(BaseModel):
+    pass

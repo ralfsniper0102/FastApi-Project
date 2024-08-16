@@ -1,4 +1,4 @@
-from src.infra.sqlalchemy.repositorios.repositorio_usuario import RepositoryUser
+from infra.sqlalchemy.repositories.repositoryUser import RepositoryUser
 from fastapi.exceptions import HTTPException
 from fastapi.param_functions import Depends
 from fastapi.security import OAuth2PasswordBearer

@@ -4,7 +4,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from src.schemas.schemas import LoginDataUsuario, LoginUsuarioSucesso, UserViewModel, UsuarioSimples
 from src.infra.sqlalchemy.config.database import get_db
-from src.infra.sqlalchemy.repositorios.repositorio_usuario \
+from infra.sqlalchemy.repositories.repositoryUser \
     import RepositoryUser
 from src.infra.providers import hash_provider, token_provider
 from src.routers.auth_utils import obter_usuario_logado
