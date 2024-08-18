@@ -1,6 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from src.helper.jwtHelper import createToken, verifyToken
+from src.helpers.jwtHelper import createToken, verifyToken
 from src.schemas import schemas
 from src.infra.sqlalchemy.models import models
 from passlib.context import CryptContext
@@ -12,7 +12,7 @@ class RepositoryUser():
     def __init__(self, session: Session):
         self.session = session
 
-    def create(self, user: schemas.UserCreate):
+    def create(self, user: schemas.UserCreateViewModel):
         userBD = models.User(name=user.name,
                                     email=user.email,
                                     password=user.password,
