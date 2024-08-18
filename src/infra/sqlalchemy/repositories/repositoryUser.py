@@ -1,6 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from src.infra.providers.token_provider import createToken
+from src.helper.jwtHelper import createToken, verifyToken
 from src.schemas import schemas
 from src.infra.sqlalchemy.models import models
 from passlib.context import CryptContext
@@ -51,3 +51,9 @@ class RepositoryUser():
         if not bcrypt.verify(password, user.password):
             return False
         return createToken()
+    
+    def validToken(self, token):
+        user = verifyToken(token)
+        if not user:
+            return False
+        return True

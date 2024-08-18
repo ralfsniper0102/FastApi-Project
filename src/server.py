@@ -1,7 +1,6 @@
-from fastapi import FastAPI, Request, BackgroundTasks, APIRouter, Depends
+from fastapi import FastAPI, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from src.routers import routesUser
-from src.jobs.write_notification import write_notification
 from fastapi.security import HTTPBearer
 
 app = FastAPI(
@@ -20,8 +19,6 @@ app.add_middleware(CORSMiddleware,
                    allow_credentials=True,
                    allow_methods=["*"],
                    allow_headers=["*"],)
-
-# app.include_router(routes_auth.router, prefix="/auth")
 
 app.include_router(routesUser.router)
 

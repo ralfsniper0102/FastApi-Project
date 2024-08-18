@@ -1,15 +1,5 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, field_validator
 import datetime
-
-
-# class UserGetAllViewModel(BaseModel):
-#     nome: str
-#     email: str
-#     nascimento: datetime.date
-
-#     class Config:
-#         from_attributes = True
 
 class GetAllUsersResponseModel(BaseModel):
     name: str
@@ -20,11 +10,10 @@ class GetAllUsersResponseModel(BaseModel):
         from_attributes = True
 
 class UserViewModel(BaseModel):
+    id: int
     name: str
     email: str
-    password: str
     birthDay: datetime.date
-
     class Config:
         from_attributes = True
 
@@ -33,7 +22,7 @@ class UserCreate(BaseModel):
     email: str
     password: str
     birthDay: datetime.date
-
+   
     class Config:
         from_attributes = True
 
