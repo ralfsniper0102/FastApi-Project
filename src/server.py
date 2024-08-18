@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Request, Depends
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from src.routers import routesUser
 from fastapi.security import HTTPBearer
 
@@ -21,6 +23,20 @@ app.add_middleware(CORSMiddleware,
                    allow_headers=["*"],)
 
 app.include_router(routesUser.router)
+
+@app.exceptionHandler(RequestValidationError)
+async def validationExceptionHandler(request: Request, exc: RequestValidationError):
+    errors = []
+    for error in exc.errors():
+        errors.append({
+            "field": error['loc'][-1],
+            "message": error['msg'].replace("Value error, ", "")
+        })
+    
+    return JSONResponse(
+        status_code=412,
+        content=errors
+    )
 
 @app.middleware('http')
 async def tempoMiddleware(request: Request, next):
