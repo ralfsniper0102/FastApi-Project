@@ -25,7 +25,7 @@ app.add_middleware(CORSMiddleware,
                    allow_methods=["*"],
                    allow_headers=["*"],)
 
-app.include_router(routesUser.router)
+app.include_router(routesUser.router, prefix="/User")
 
 @app.exception_handler(RequestValidationError)
 async def validationExceptionHandler(request: Request, exc: RequestValidationError):
