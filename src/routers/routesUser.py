@@ -41,7 +41,7 @@ def getById(request: Request, id: int,session: Session = Depends(get_db)):
 @router.post('/Create', status_code=status.HTTP_201_CREATED, description="Cria um usuário")
 def create(user: PostCreateRequest, session: Session = Depends(get_db)):
     try:
-        result = RepositoryUser(session).getByEmail(user.email)
+        result = RepositoryUser(session).getByEmail((user.email).lower())
     except:
         raise Response(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=f'Erro ao listar usuários')
