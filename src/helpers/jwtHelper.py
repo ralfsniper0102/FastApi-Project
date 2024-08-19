@@ -17,6 +17,8 @@ def createToken():
     return token_jwt
 
 def verifyToken(token: str):
+    if not token:
+        return False
     try:
         carga = jwt.decode(token.replace("Bearer ", ""), secretKey, algorithms=[algorithm])
         return carga
