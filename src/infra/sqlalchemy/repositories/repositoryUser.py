@@ -14,7 +14,7 @@ class RepositoryUser():
 
     def create(self, user: schemas.UserCreateViewModel):
         userBD = models.User(name=user.name,
-                                    email=user.email,
+                                    email=user.email.lower(),
                                     password=user.password,
                                     birthDay=user.birthDay
                                     )
