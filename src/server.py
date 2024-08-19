@@ -12,6 +12,9 @@ app = FastAPI(
         auto_error=False,
         description="JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
     ))],
+    docs_url="/docs",
+    openapi_url="/openapi.json",
+    root_path="/fast-api-python"
 )
 
 origins = []
