@@ -55,12 +55,6 @@ class LoginRequest(BaseModel):
         if not validEmail(value):
             raise ValueError('Email inválido')
         return value
-
-    @field_validator('password')
-    def checkPassword(cls, value):
-        if not validPassword(value):
-            raise ValueError('Senha inválida')
-        return value
     
 class LoginResponse(BaseModel):
     pass
