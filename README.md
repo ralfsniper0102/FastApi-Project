@@ -7,7 +7,11 @@ Projeto backend utilizado para Cadastro de Usuários e Gerenciamento de Acesso.
 - Autenticação JWT
 - Persistencia dos dados no Banco de dados
 - Documentado com Swagger
+- Validações de entrada de dados
  
+## Link Swagger
+- https://solutionsapi.online/fast-api-python/docs
+
 ## Autor
 - [@ralfsniper0102](https://www.github.com/ralfsniper0102)
 
@@ -20,5 +24,19 @@ Projeto backend utilizado para Cadastro de Usuários e Gerenciamento de Acesso.
 ## ORM
 - SQLAlchemy
 
+## Libs
+- Pydantic (Validações de entrada de dados)
+- Alembic (Migrações de Banco de Dados)
+- bcript (Criptografia de senhas)
+- Uvicorn (Servidor)
+- Psycopg2 (Conexão com o banco de dados)
+- Python-jose (JWT)
+- Swagger (Documentação)
+
+## Infra
+- VPS (Linux Ubuntu)
+- Nginx
+
 ## Banco de Dados
 - Postgresql
+
