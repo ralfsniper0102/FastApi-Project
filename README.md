@@ -32,6 +32,7 @@ Projeto backend utilizado para Cadastro de Usuários e Gerenciamento de Acesso.
 - Psycopg2 (Conexão com o banco de dados)
 - Python-jose (JWT)
 - Swagger (Documentação)
+- Pytest (Testes)
 
 ## Infra
 - VPS (Linux Ubuntu)
