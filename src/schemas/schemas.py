@@ -3,6 +3,7 @@ import datetime
 from src.validations.patterns import validName, validEmail, validPassword
 
 class GetAllUsersResponseModel(BaseModel):
+    id: int
     name: str
     email: str
     birthDay: datetime.date
@@ -64,5 +65,20 @@ class UserCreateViewModel(BaseModel):
     email: str
     birthDay: datetime.date
     password: str
+    class Config:
+        from_attributes = True
+        
+class UpdateUserRequest(BaseModel):
+    id: int
+    name: str
+    birthDay: datetime.date
+    
+    @field_validator('name')
+    def checkName(cls, value):
+        if len(value) < 3:
+            raise ValueError('Nome deve conter mais de 3 caracteres')
+        if not validName(value):
+            raise ValueError('Nome inválido')
+        return value
     class Config:
         from_attributes = True

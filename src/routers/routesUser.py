@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Request, Response, status, Depends, HTTPException
 from sqlalchemy.orm import Session
 from src.helpers.jwtHelper import verifyToken
-from src.schemas.schemas import GetAllUsersResponseModel, GetByIdResponse, LoginRequest, PostCreateRequest
+from src.schemas.schemas import GetAllUsersResponseModel, GetByIdResponse, LoginRequest, PostCreateRequest, UpdateUserRequest
 from src.infra.sqlalchemy.config.database import get_db
 from src.infra.sqlalchemy.repositories.repositoryUser import RepositoryUser
 
@@ -36,7 +36,7 @@ def getById(request: Request, id: int,session: Session = Depends(get_db)):
         return result
     except:
         raise Response(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=f'Erro ao listar usuários')
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=f'Erro ao buscar usuário')
 
 @router.post('/Create', status_code=status.HTTP_201_CREATED, description="Cria um usuário")
 def create(user: PostCreateRequest, session: Session = Depends(get_db)):
@@ -80,4 +80,34 @@ def validToken(token: str ,session: Session = Depends(get_db)):
     
     return Response(status_code=status.HTTP_200_OK)
     
+@router.put("/Update", status_code=status.HTTP_200_OK, description="Atualiza um usuário")
+def update(request: Request, user: UpdateUserRequest, session: Session = Depends(get_db)):
+    resultVerifyToken = verifyToken(request.headers.get('Authorization'))
+    if not resultVerifyToken:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    try:
+        result = RepositoryUser(session).update(user)
+        if not result:
+            return Response(status_code=status.HTTP_404_NOT_FOUND, content=f'Usuário não existente')    
+    except:
+        raise Response(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=f'Erro ao atualizar usuário')
     
+    if not result:
+        return Response(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    return Response(status_code=status.HTTP_200_OK)
+
+@router.delete("/Delete/{id}", status_code=status.HTTP_200_OK, description="Deleta um usuário")
+def delete(request: Request, id: int, session: Session = Depends(get_db)):
+    resultVerifyToken = verifyToken(request.headers.get('Authorization'))
+    if not resultVerifyToken:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    try:
+        result = RepositoryUser(session).delete(id)
+    except:
+        raise Response(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=f'Erro ao deletar usuário')
+
+    if not result:
+        return Response(status_code=status.HTTP_404_NOT_FOUND, content=f'Usuário não existente')
+
+    return Response(status_code=status.HTTP_200_OK)

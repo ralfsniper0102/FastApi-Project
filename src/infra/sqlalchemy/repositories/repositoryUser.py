@@ -1,9 +1,11 @@
+from fastapi import HTTPException, Response
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from src.helpers.jwtHelper import createToken, verifyToken
 from src.schemas import schemas
 from src.infra.sqlalchemy.models import models
 from passlib.context import CryptContext
+from fastapi import status
 
 bcrypt = CryptContext(schemes=['bcrypt'])
 
@@ -56,4 +58,22 @@ class RepositoryUser():
         user = verifyToken(token)
         if not user:
             return False
+        return True
+    
+    def update(self, user: schemas.UpdateUserRequest):
+        userBD = self.searchById(user.id)
+        if userBD == None:
+           return False
+        userBD.name = user.name
+        userBD.birthDay = user.birthDay
+        self.session.commit()
+        self.session.refresh(userBD)
+        return userBD
+    
+    def delete(self, id):
+        userBD = self.searchById(id)
+        if userBD == None:
+            return False
+        self.session.delete(userBD)
+        self.session.commit()
         return True
