@@ -47,7 +47,7 @@ def create(user: PostCreateRequest, session: Session = Depends(get_db)):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=f'Erro ao listar usuários')
     
     if result:
-        raise Response(status_code=status.HTTP_400_BAD_REQUEST, content=f'Email cadastrado')
+        return Response(status_code=status.HTTP_400_BAD_REQUEST, content=f'Email cadastrado')
 
     try:
         RepositoryUser(session).create(user)
