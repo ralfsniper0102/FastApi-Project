@@ -13,6 +13,21 @@
             ],
             "jinja": true,
             "justMyCode": true
+        },
+        {
+            "name": "Python: Pytest",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "--maxfail=1",
+                "--disable-warnings"
+            ],
+            "justMyCode": true,
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
         }
     ]
 }
